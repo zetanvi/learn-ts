@@ -25,6 +25,36 @@ let s1 = Symbol("miniYellow");
 let s2 = Symbol("miniYellow");
 let s3 = Symbol.for("miniYellow");
 let s4 = Symbol.for("miniYellow");
-s3 === s4
-s1 === s3;
 console.log(s3 === s4, s1 === s3);
+
+
+let age = Symbol('mini')
+console.log(typeof age);
+let obj = {
+  [age]: 19,
+  name: 'miniYellow'
+}
+for (const key in obj) {
+  console.log(key); //name
+}
+let ss = Object.getOwnPropertySymbols(obj)
+console.log(ss, 'obj.symbol');  //[Symbol(mini)]
+let ssr = Reflect.ownKeys(obj)
+console.log(ssr);  //["name",Symbol(mini)]
+
+
+const uniSym: unique symbol = Symbol()
+let uniObj = {
+  [uniSym]: 222
+}
+console.log(uniObj[uniSym]);
+
+
+enum Status {
+  error = 500,
+  success = 200,
+  failed = 400
+}
+console.log(Status.error);
+console.log(Status.success);
+console.log(Status.failed);
