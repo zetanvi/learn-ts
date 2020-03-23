@@ -58,3 +58,28 @@ enum Status {
 console.log(Status.error);
 console.log(Status.success);
 console.log(Status.failed);
+
+
+// !断言类型
+let getLength = (target: string | number): number => {
+  if ((target as string).length) {
+    return (target as string).length
+  } else {
+    return target.toString().length
+  }
+}
+
+// !接口
+let getName = ({ firstName, lastName }: info): string => {
+  return `${firstName}${lastName}`
+}
+
+getName({ firstName: 'mini', lastName: 'yellow' })
+
+interface info {
+  firstName: string,
+  lastName: string,
+  show?: boolean
+}
+let aaa = { firstName: '44', lastName: '00' }
+getName(aaa)
