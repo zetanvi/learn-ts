@@ -1,85 +1,68 @@
-let a: number = 222
-console.log(a);
-
-let b = 222
-
-let c: boolean = false
-
-let str: "miniYellow"
-let u: undefined = undefined
-let n: null = null
-let rr: [number, number]
-rr = [1, 2]
-let tt: Array<string> = ['1', '2']
-let tuple: [number, string, boolean]
-tuple = [1, '2', true]
+import { ArrayGa } from "./algorithms/array";
+import { StringGa } from "./algorithms/string";
 
 
-let some: any = '111'
-some = 2
-some = { a: 1 }
-
-let v: void = undefined
-
-let s1 = Symbol("miniYellow");
-let s2 = Symbol("miniYellow");
-let s3 = Symbol.for("miniYellow");
-let s4 = Symbol.for("miniYellow");
-console.log(s3 === s4, s1 === s3);
-
-
-let age = Symbol('mini')
-console.log(typeof age);
-let obj = {
-  [age]: 19,
-  name: 'miniYellow'
-}
-for (const key in obj) {
-  console.log(key); //name
-}
-let ss = Object.getOwnPropertySymbols(obj)
-console.log(ss, 'obj.symbol');  //[Symbol(mini)]
-let ssr = Reflect.ownKeys(obj)
-console.log(ssr);  //["name",Symbol(mini)]
+let arr1: Array<number> = [1, 2, 3, 4, 5, 3]
+let arr2: Array<number> = [3, 6, 4, 8, 9, 3, 3]
+let arr5: Array<number> = []
+ArrayGa.overlap(arr1, arr2, arr5)
+let arr3: Array<number> = arr1.sort((a: number, b: number) => {
+  return a - b
+})
+let arr4: Array<number> = arr2.sort((a: number, b: number) => {
+  return a - b
+})
+let arr6: Array<number> = []
+ArrayGa.overlapSort(arr3, arr4, arr6)
 
 
-const uniSym: unique symbol = Symbol()
-let uniObj = {
-  [uniSym]: 222
-}
-console.log(uniObj[uniSym]);
+let strArr: Array<string> = ['mini', 'mimi', 'miniyellow']
+ArrayGa.prefix(strArr)
+
+let arr7: Array<number> = [7, 1, 5, 3, 6, 4]
+let arr8: Array<number> = [1, 2, 3, 4, 5, 6]
+let arr9: Array<number> = [7, 6, 4, 3, 1]
+ArrayGa.stock(arr7)
+ArrayGa.stock(arr8)
+ArrayGa.stock(arr9)
+
+let arr10: Array<number> = [1, 2, 3, 4, 5, 6, 7]
+let k: number = 3
+ArrayGa.rotate(arr10, k)
 
 
-enum Status {
-  error = 500,
-  success = 200,
-  failed = 400
-}
-console.log(Status.error);
-console.log(Status.success);
-console.log(Status.failed);
 
 
-// !断言类型
-let getLength = (target: string | number): number => {
-  if ((target as string).length) {
-    return (target as string).length
-  } else {
-    return target.toString().length
-  }
-}
 
-// !接口
-let getName = ({ firstName, lastName }: info): string => {
-  return `${firstName}${lastName}`
-}
 
-getName({ firstName: 'mini', lastName: 'yellow' })
 
-interface info {
-  firstName: string,
-  lastName: string,
-  show?: boolean
-}
-let aaa = { firstName: '44', lastName: '00' }
-getName(aaa)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
