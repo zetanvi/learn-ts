@@ -4,6 +4,8 @@ interface ArrayGa {
   prefix: Function,
   stock: Function,
   rotate: Function,
+  DeleteInPlace: Function,
+  RemoveInPlace: Function,
 }
 interface addObj {
   [prop: number]: any
@@ -125,12 +127,38 @@ export const ArrayGa: ArrayGa = {
     console.log(count, 'stock');
     return count
   },
-  // 旋转数组
+
+  // 旋转数组(给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。)
+  //tips: [1,2,3,4,5] 移动3 -> [3,4,5,1,2]  使用原地算法：即结果替换输出，中间不增加变量
   rotate(arr: Array<number>, k: number) {
     k %= arr.length
-    // splice中-1表示从最后开始截取
-    arr.unshift.apply(arr, arr.splice(-1, k))
+    // splice不能从后向前数，所以想截取后面的几个需要splice(-k,k)
+    arr.splice(0, 0, ...arr.splice(-k, k))
     console.log(arr, 'rotate');
     return arr
+  },
+
+  // 原地删除(给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。)
+  DeleteInPlace(arr: Array<number>, num: number) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === num) {
+        arr.splice(i, 1)
+        i--
+      }
+    }
+    console.log(arr, 'DeleteInPlace');
+    return arr.length
+  },
+
+  //原地去重(给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。)
+  RemoveInPlace(arr: Array<number>) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === arr[i + 1]) {
+        arr.splice(i, 1)
+        i--
+      }
+    }
+    console.log(arr, 'RemoveInPlace');
+    return arr.length
   }
 }

@@ -30,6 +30,13 @@ let arr10: Array<number> = [1, 2, 3, 4, 5, 6, 7]
 let k: number = 3
 ArrayGa.rotate(arr10, k)
 
+let arr11: Array<number> = [1, 2, 3, 3, 4, 5, 6, 3, 3]
+let num: number = 3
+ArrayGa.DeleteInPlace(arr11, num)
+
+let arr12: Array<number> = [1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8]
+ArrayGa.RemoveInPlace(arr12)
+
 
 
 
