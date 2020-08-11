@@ -1,6 +1,7 @@
 import { ArrayGa } from "./algorithms/array";
 import { StringGa } from "./algorithms/string";
 
+// !注释中 *为自己想的  ?为借鉴的
 
 let arr1: Array<number> = [1, 2, 3, 4, 5, 3]
 let arr2: Array<number> = [3, 6, 4, 8, 9, 3, 3]
@@ -37,7 +38,12 @@ ArrayGa.DeleteInPlace(arr11, num)
 let arr12: Array<number> = [1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8]
 ArrayGa.RemoveInPlace(arr12)
 
-
+let arr13: Array<number> = [2, 3, 4, 0, 7, 5, 8]
+let arr14: Array<number> = [3, 3, 9, 9]
+let arr15: Array<number> = [9, 9, 9]
+ArrayGa.AddOne(arr13)
+ArrayGa.AddOne(arr14)
+ArrayGa.AddOne(arr15)
 
 
 

@@ -6,6 +6,7 @@ interface ArrayGa {
   rotate: Function,
   DeleteInPlace: Function,
   RemoveInPlace: Function,
+  AddOne: Function,
 }
 interface addObj {
   [prop: number]: any
@@ -130,7 +131,7 @@ export const ArrayGa: ArrayGa = {
 
   // 旋转数组(给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。)
   //tips: [1,2,3,4,5] 移动3 -> [3,4,5,1,2]  使用原地算法：即结果替换输出，中间不增加变量
-  rotate(arr: Array<number>, k: number) {
+  rotate: (arr: Array<number>, k: number) => {
     k %= arr.length
     // splice不能从后向前数，所以想截取后面的几个需要splice(-k,k)
     arr.splice(0, 0, ...arr.splice(-k, k))
@@ -139,7 +140,7 @@ export const ArrayGa: ArrayGa = {
   },
 
   // 原地删除(给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。)
-  DeleteInPlace(arr: Array<number>, num: number) {
+  DeleteInPlace: (arr: Array<number>, num: number) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === num) {
         arr.splice(i, 1)
@@ -151,7 +152,7 @@ export const ArrayGa: ArrayGa = {
   },
 
   //原地去重(给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。)
-  RemoveInPlace(arr: Array<number>) {
+  RemoveInPlace: (arr: Array<number>) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === arr[i + 1]) {
         arr.splice(i, 1)
@@ -160,5 +161,45 @@ export const ArrayGa: ArrayGa = {
     }
     console.log(arr, 'RemoveInPlace');
     return arr.length
+  },
+
+  //给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 [1,2,3] ->[1,2,4]  [2,3,9] ->[2,4,0]
+  AddOne: (arr: Array<number>) => {
+    // 将数组转为数字+1后再转为数组，缺点：数字有大小范围 正负2的53次方-1
+
+    //* 使用递归
+    let recursive = (i: number, arr: Array<number>) => {
+      if (arr[i] + 1 === 10) {
+        arr[i] = 0
+        if (i === 0) {
+          arr.unshift(1)
+        } else {
+          i--
+          recursive(i, arr)
+        }
+      } else {
+        arr[i] += 1
+      }
+    }
+    let i: number = arr.length - 1
+    recursive(i, arr)
+    console.log(arr, 'AddOne');
+    return arr
+
+    //? 倒着遍历，for循环走完表示返回[1,0,....,0]
+    // let length = arr.length
+    // for (let i = length - 1; i >= 0; i--) {
+    //   arr[i]++
+    //   arr[i] %= 10
+    //   if (arr[i] !== 0) {
+    //     // 此处return会直接跳出循环和函数
+    //     console.log(arr, 'AddOne');
+    //     return arr
+    //   }
+    // }
+    // // 以下代码表示上面for循环走完了，也就是数组中所有元素都+1，因此应返回[1,0,....,0]
+    // arr.unshift(1)
+    // console.log(arr, 'AddOne');
+    // return arr
   }
 }
