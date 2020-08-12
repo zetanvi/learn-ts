@@ -33,17 +33,28 @@ ArrayGa.rotate(arr10, k)
 
 let arr11: Array<number> = [1, 2, 3, 3, 4, 5, 6, 3, 3]
 let num: number = 3
-ArrayGa.DeleteInPlace(arr11, num)
+ArrayGa.deleteInPlace(arr11, num)
 
 let arr12: Array<number> = [1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8]
-ArrayGa.RemoveInPlace(arr12)
+ArrayGa.removeInPlace(arr12)
 
 let arr13: Array<number> = [2, 3, 4, 0, 7, 5, 8]
 let arr14: Array<number> = [3, 3, 9, 9]
 let arr15: Array<number> = [9, 9, 9]
-ArrayGa.AddOne(arr13)
-ArrayGa.AddOne(arr14)
-ArrayGa.AddOne(arr15)
+ArrayGa.addOne(arr13)
+ArrayGa.addOne(arr14)
+ArrayGa.addOne(arr15)
+
+let arr16: Array<number> = [1, 2, 3, 5, 7, 9, 4]
+let arr17: Array<number> = [2, 3, 3, 7, 9, 5]
+let target1: number = 14
+let target2: number = 6
+ArrayGa.twoSum(arr16, target1)
+ArrayGa.twoSum(arr17, target2)
+ArrayGa.threeSum(arr16, 16)
+ArrayGa.fourSum(arr16, 17)
+
+
 
 
 

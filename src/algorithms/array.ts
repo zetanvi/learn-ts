@@ -4,9 +4,12 @@ interface ArrayGa {
   prefix: Function,
   stock: Function,
   rotate: Function,
-  DeleteInPlace: Function,
-  RemoveInPlace: Function,
-  AddOne: Function,
+  deleteInPlace: Function,
+  removeInPlace: Function,
+  addOne: Function,
+  twoSum: Function,
+  threeSum: Function,
+  fourSum: Function,
 }
 interface addObj {
   [prop: number]: any
@@ -140,7 +143,7 @@ export const ArrayGa: ArrayGa = {
   },
 
   // 原地删除(给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。)
-  DeleteInPlace: (arr: Array<number>, num: number) => {
+  deleteInPlace: (arr: Array<number>, num: number) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === num) {
         arr.splice(i, 1)
@@ -152,7 +155,7 @@ export const ArrayGa: ArrayGa = {
   },
 
   //原地去重(给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。)
-  RemoveInPlace: (arr: Array<number>) => {
+  removeInPlace: (arr: Array<number>) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === arr[i + 1]) {
         arr.splice(i, 1)
@@ -164,7 +167,7 @@ export const ArrayGa: ArrayGa = {
   },
 
   //给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 [1,2,3] ->[1,2,4]  [2,3,9] ->[2,4,0]
-  AddOne: (arr: Array<number>) => {
+  addOne: (arr: Array<number>) => {
     // 将数组转为数字+1后再转为数组，缺点：数字有大小范围 正负2的53次方-1
 
     //* 使用递归
@@ -201,5 +204,94 @@ export const ArrayGa: ArrayGa = {
     // arr.unshift(1)
     // console.log(arr, 'AddOne');
     // return arr
+  },
+
+  //两数之和(给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。  tips:你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素)
+  twoSum: (arr: Array<number>, target: number) => {
+    // ?  遍历数组放进对象中，key为元素，value为下标，返回 obj[target-item] 有值的那个value和i即可
+    let obj: addObj = {}
+    let res: Array<number> = []
+    arr.some((item, index) => {
+      let num: number = target - item
+      if (obj[num] !== undefined) {
+        res = [obj[num], index]
+        return true
+      }
+      obj[item] = index
+    })
+    console.log(res, 'sum');
+    return res
+  },
+
+  // 三数之和 (给你一个包含 n 个(n>3)整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。注意：答案中不可以包含重复的三元组。)
+  threeSum: (arr: Array<number>, target: number) => {
+    // ? 先排序 在确定一个固定数 然后找另两个数
+    let res: Array<Array<number>> = []
+    let order = arr.sort((a, b) => a - b)
+    order.some((item, index, array) => {
+      // 固定值大于目标值 直接结束循环
+      if (item > target) return true
+      // 若固定值后面的数小于2个 就不执行以下代码
+      if (index < array.length - 2) {
+        let left = index + 1
+        let right = array.length - 1
+        let num = target - item
+        // 当固定数重复时 item!==array[index-1] ，跳过 
+        if (index === 0 || item !== array[index - 1]) {
+          while (left < right) {
+            if (array[left] + array[right] === num) {
+              // 这三个数符合  放到返回数组中
+              res.push([item, array[left], array[right]])
+              // 在left小于right情况下，跳过left连续重复的数
+              while (left < right && array[left] === array[left + 1]) left++
+              // 在left小于right情况下，跳过right连续重复的数
+              while (left < right && array[right] === array[right - 1]) right--
+              // 左右下标都向中间移动一格
+              left++
+              right--
+            } else if (array[left] + array[right] < num) {
+              left++
+            } else {
+              right--
+            }
+          }
+        }
+      }
+    })
+    console.log(res, 'threeSum');
+    return res
+  },
+
+  // 四数之和
+  fourSum: (arr: Array<number>, target: number) => {
+    let res: Array<Array<number>> = []
+    let order: Array<number> = arr.sort((a, b) => a - b)
+    order.some((item, index, array) => {
+      // 两个固定值大于目标值 直接结束循环
+      if (item + array[index + 1] > target) return true
+      // 若第一个固定值后面的数小于3个 就不执行以下代码
+      if (index < array.length - 3) {
+        let left = index + 2
+        let right = array.length - 1
+        let num = target - item - array[index + 1]
+        if (index === 0 || !(item === array[index + 1] && array[index + 1] === array[index + 2])) {
+          while (left < right) {
+            if (array[left] + array[right] === num) {
+              res.push([item, array[index + 1], array[left], array[right]])
+              while (left < right && array[left] !== array[left + 1]) left++
+              while (left < right && array[right] !== array[right - 1]) right--
+              left++
+              right--
+            } else if (array[left] + array[right] < num) {
+              left++
+            } else {
+              right--
+            }
+          }
+        }
+      }
+    })
+    console.log(res, 'fourSum');
+    return res
   }
 }
