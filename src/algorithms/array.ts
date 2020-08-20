@@ -10,11 +10,13 @@ interface ArrayGa {
   twoSum: Function,
   threeSum: Function,
   fourSum: Function,
+  zString: Function
 }
 interface addObj {
   [prop: number]: any
 }
 
+// !注释中 *为自己想的  ?为借鉴的
 export const ArrayGa: ArrayGa = {
   // 给定两个数组，编写一个函数来计算它们的交集。(输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。我们可以不考虑输出结果的顺序。)
   overlap: (arr1: Array<number>, arr2: Array<number>, arr5: Array<number>) => {
@@ -171,21 +173,21 @@ export const ArrayGa: ArrayGa = {
     // 将数组转为数字+1后再转为数组，缺点：数字有大小范围 正负2的53次方-1
 
     //* 使用递归
-    let recursive = (i: number, arr: Array<number>) => {
+    let recursion = (i: number, arr: Array<number>) => {
       if (arr[i] + 1 === 10) {
         arr[i] = 0
         if (i === 0) {
           arr.unshift(1)
         } else {
           i--
-          recursive(i, arr)
+          recursion(i, arr)
         }
       } else {
         arr[i] += 1
       }
     }
     let i: number = arr.length - 1
-    recursive(i, arr)
+    recursion(i, arr)
     console.log(arr, 'AddOne');
     return arr
 
@@ -293,5 +295,25 @@ export const ArrayGa: ArrayGa = {
     })
     console.log(res, 'fourSum');
     return res
+  },
+
+  // Z字形变换
+  zString: (str: string, row: number) => {
+    // ?  建立个length===row的空字符串数组，遍历字符串，将元素循环正反序放入数组中
+    let flag: Boolean = false
+    let arr: Array<string> = new Array(row).fill("")
+    let count: number = 0
+    for (let i = 0; i < str.length; i++) {
+      // 正序依次放入
+      arr[count] += str[i]
+      // 当走到数组的头或尾时，反过来执行
+      if (count === 0 || count === arr.length - 1) flag = !flag
+      // flag用来判断正反序
+      count += flag ? 1 : -1
+    }
+    let res: string = arr.join("")
+    console.log(res, 'zString');
+    return res
   }
+
 }

@@ -1,7 +1,7 @@
-import { ArrayGa } from "./algorithms/array";
-import { StringGa } from "./algorithms/string";
+import { ArrayGa } from "./algorithms/array"; //数组算法
+import { StringGa } from "./algorithms/string"; //字符串算法
+import { DPGa } from "./algorithms/dynamicProgramming"; //动态规划算法
 
-// !注释中 *为自己想的  ?为借鉴的
 
 let arr1: Array<number> = [1, 2, 3, 4, 5, 3]
 let arr2: Array<number> = [3, 6, 4, 8, 9, 3, 3]
@@ -54,8 +54,12 @@ ArrayGa.twoSum(arr17, target2)
 ArrayGa.threeSum(arr16, 16)
 ArrayGa.fourSum(arr16, 17)
 
+let str: string = "miniyellow"
+let row: number = 3
+ArrayGa.zString(str, row)
 
-
+let n: number = 5
+DPGa.stairway(n)
 
 
 
